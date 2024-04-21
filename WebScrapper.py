@@ -9,6 +9,7 @@ class WebScrapper():
     def __init__(self, url):
         self.url = url
         self.stock_reader = StockReader()
+        self.df = "./data/stocklist.csv"
 
     def validate_url(self):
         parsed_url = urlparse(self.url)
@@ -34,7 +35,7 @@ class WebScrapper():
             soup = BeautifulSoup(page.content, "html.parser")
             result = str(soup.find("span", class_="ticker"))
             treated_result = self.extract_stock_ticker(result)
-            if self.stock_reader.stock_exists(treated_result):
+            if self.stock_reader.stock_exists(treated_result, self.df):
                 print(treated_result)
         else:
             print("Invalid URL")

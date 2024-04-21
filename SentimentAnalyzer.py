@@ -14,6 +14,7 @@ class SentimentAnalyzer:
         self.MODEL = f"cardiffnlp/twitter-roberta-base-sentiment"
         self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL)
         self.model = AutoModelForSequenceClassification.from_pretrained(self.MODEL)
+        self.df = "./data/stocklist.csv"
 
     def evaluate_sentiment(self):
         encoded_text = self.tokenizer(self.text, return_tensors='pt')
